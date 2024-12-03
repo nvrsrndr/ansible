@@ -1,7 +1,6 @@
 - name: Reboot server
   hosts: all
   become: yes
-  become_user: kyko
   tasks:
     - name: Reboot now
       reboot:
