@@ -1,8 +1,8 @@
-name: reboot
+- name: reboot
   hosts: all
   become: yes
   become_pass: h4ck1996
   tasks:
-    - name: Reboot the system
+    - name: Reboot now
       reboot:
         reboot_command: reboot
