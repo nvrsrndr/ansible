@@ -1,6 +1,7 @@
 - name: Restart SSH Service
   hosts: all
   become: yes
+  become_user: kyko
   tasks:
     - name: Restart SSH service
       service:
