@@ -1,8 +1,8 @@
-- name: Reboot server
-  hosts: all
-  become: yes
-  become_user: kyko
-  tasks:
-    - name: Reboot now
-      reboot:
-        reboot_command: reboot
+hosts: all
+become: true
+
+tasks:
+	name: reboot the machine
+	reboot:
+		reboot_timeout: 300
+		test_command: uptime
