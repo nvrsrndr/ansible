@@ -1,6 +1,7 @@
 - name: reboot
   hosts: all
   become: yes
+  become_user: root
   become_pass: "h4ck1996"
   tasks:
     - name: Reboot now
