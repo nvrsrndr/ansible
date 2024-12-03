@@ -1,5 +1,4 @@
----
-- name: reboot
+name: reboot
   hosts: all
   become: yes
   become_pass: h4ck1996
