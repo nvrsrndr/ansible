@@ -1,7 +1,7 @@
 - name: reboot
   hosts: all
   become: yes
-  become_pass: h4ck1996
+  become_pass: "h4ck1996"
   tasks:
     - name: Reboot now
       reboot:
