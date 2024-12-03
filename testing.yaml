@@ -2,6 +2,7 @@
 - name: Test Playbook for Ansible
   hosts: all
   become: true
+  become_user: kyko
   tasks:
     - name: Check if the server is reachable
       ping:
