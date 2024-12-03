@@ -1,8 +1,8 @@
-hosts: all
-become: true
-
-tasks:
-	name: reboot
-	reboot:
-		reboot_timeout: 300
-		test_command: uptime
+---
+- name: Reboot Ubuntu Server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Reboot the system
+      reboot:
+        reboot_command: reboot
