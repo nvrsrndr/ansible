@@ -1,6 +1,7 @@
 - name: Reboot server
   hosts: all
   become: yes
+  become_user: root
   tasks:
     - name: Reboot now
       reboot:
