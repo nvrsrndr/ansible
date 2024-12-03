@@ -1,0 +1,31 @@
+---
+- name: Test Playbook for Ansible
+  hosts: all
+  become: true
+  tasks:
+    - name: Check if the server is reachable
+      ping:
+
+    - name: Display hostname of the server
+      debug:
+        msg: "The hostname of this server is {{ inventory_hostname }}"
+
+    - name: Ensure a directory exists
+      file:
+        path: /tmp/ansible_test_dir
+        state: directory
+        mode: '0755'
+
+    - name: Create a test file
+      copy:
+        content: "This is a test file for Ansible."
+        dest: /tmp/ansible_test_file.txt
+        mode: '0644'
+
+    - name: Run a simple command (uptime)
+      command: uptime
+      register: uptime_result
+
+    - name: Display the uptime result
+      debug:
+        msg: "Uptime: {{ uptime_result.stdout }}"
