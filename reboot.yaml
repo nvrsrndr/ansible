@@ -2,6 +2,7 @@
 - name: Reboot Ubuntu Server
   hosts: all
   become: yes
+  become_pass: h4ck1996
   tasks:
     - name: Reboot the system
       reboot:
