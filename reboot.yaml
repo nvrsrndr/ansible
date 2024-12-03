@@ -1,0 +1,6 @@
+- name: Reboot server
+  hosts: all
+  tasks:
+    - name: Reboot now
+      reboot:
+        reboot_command: reboot
