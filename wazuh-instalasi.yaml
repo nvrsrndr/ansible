@@ -2,7 +2,7 @@
 - name: Install and configure Wazuh agent on Ubuntu 24.04
   hosts: all
   become: yes
-  
+
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
@@ -31,11 +31,13 @@
         state: present
 
     - name: Configure Wazuh agent to point to Wazuh server
-      ansible.builtin.lineinfile:
+      ansible.builtin.blockinfile:
         path: /var/ossec/etc/ossec.conf
-        regexp: '^<server>'
-        line: '<server> 192.168.0.109 </server>'
-        state: present
+        marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+        block: |
+          <server>
+              <address>192.168.0.109</address>
+          </server>
 
     - name: Enable and start Wazuh agent service
       ansible.builtin.systemd:
