@@ -5,10 +5,6 @@
   become_user: kyko
   
   tasks:
-   - name: update apt list
-     ansible.builtin.apt:
-      update_cache: yes
-      
     - name: Update apt cache
       ansible.builtin.apt:
         update_cache: yes
