@@ -1,6 +1,7 @@
 - name: Install Wazuh Agent on Ubuntu
   hosts: all
   become: yes
+  become_user: kyko
 
   tasks:
     - name: Add Wazuh GPG key
