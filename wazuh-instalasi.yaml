@@ -2,6 +2,7 @@
 - name: Install and configure Wazuh agent on Ubuntu 24.04
   hosts: all
   become: yes
+  become_user: root
   tasks:
     - name: Update apt cache
       ansible.builtin.apt:
