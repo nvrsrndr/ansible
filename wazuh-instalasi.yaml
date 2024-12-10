@@ -38,7 +38,7 @@
           <server>
               <address>192.168.0.109</address>
           </server>
-        insertafter: "<server>"  # Menyisipkan blok setelah elemen <agent>
+        insertafter: "<agent>"  # Menyisipkan blok setelah elemen <agent>
 
     - name: Enable and start Wazuh agent service
       ansible.builtin.systemd:
