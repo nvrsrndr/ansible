@@ -31,12 +31,11 @@
         state: present
         
     - name: Configure Wazuh agent to point to Wazuh server
-      ansible.builtin.blockinfile:
+      ansible.builtin.lineinfile:
         path: /var/ossec/etc/ossec.conf
-        block: |
-          <server>
-              <address>192.168.0.109</address>
-          </server>
+        regexp: '<address>'
+        line: '<address>192.168.0.109</address>'
+        state: present
 
     - name: Enable and start Wazuh agent service
       ansible.builtin.systemd:
