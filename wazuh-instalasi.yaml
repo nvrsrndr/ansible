@@ -1,50 +1,50 @@
 ---
-tasks:
-  - name: Update apt cache
-    ansible.builtin.apt:
-      update_cache: yes
+- name: Install and configure Wazuh agent on Ubuntu 24.04
+  hosts: all
+  become: yes
+  become_user: kyko
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
 
-  - name: Install dependencies
-    ansible.builtin.apt:
-      name:
-        - curl
-        - apt-transport-https
-        - lsb-release
-      state: present
+    - name: Install dependencies
+      ansible.builtin.apt:
+        name:
+          - curl
+          - apt-transport-https
+          - lsb-release
+        state: present
 
-  - name: Add Wazuh repository GPG key
-    ansible.builtin.shell:
-      cmd: curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | sudo apt-key add -
+    - name: Add Wazuh repository GPG key
+      ansible.builtin.shell:
+        cmd: curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | sudo apt-key add -
 
-  - name: Add Wazuh repository to sources.list
-    ansible.builtin.apt_repository:
-      repo: "deb https://packages.wazuh.com/4.x/apt/ stable main"
-      state: present
+    - name: Add Wazuh repository to sources.list
+      ansible.builtin.apt_repository:
+        repo: "deb https://packages.wazuh.com/4.x/apt/ stable main"
+        state: present
 
-  - name: Install Wazuh agent
-    ansible.builtin.apt:
-      name: wazuh-agent
-      state: present
+    - name: Install Wazuh agent
+      ansible.builtin.apt:
+        name: wazuh-agent
+        state: present
 
-  - name: Configure Wazuh agent to point to Wazuh server
-    ansible.builtin.lineinfile:
-      path: /var/ossec/etc/ossec.conf
-      regexp: '^<server>'
-      line: '<server> 192.168.0.109 </server>'
-      state: present
+    - name: Configure Wazuh agent to point to Wazuh server
+      ansible.builtin.lineinfile:
+        path: /var/ossec/etc/ossec.conf
+        regexp: '^<server>'
+        line: '<server> 192.168.0.109 </server>'
+        state: present
 
-  - name: Enable and start Wazuh agent service
-    ansible.builtin.systemd:
-      name: wazuh-agent
-      enabled: yes
-      state: started
+    - name: Enable and start Wazuh agent service
+      ansible.builtin.systemd:
+        name: wazuh-agent
+        enabled: yes
+        state: started
 
-  - name: Verify Wazuh agent status
-    ansible.builtin.systemd:
-      name: wazuh-agent
-      state: started
-      enabled: yes
-      
-  
-
-
+    - name: Verify Wazuh agent status
+      ansible.builtin.systemd:
+        name: wazuh-agent
+        state: started
+        enabled: yes
