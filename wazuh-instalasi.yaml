@@ -1,0 +1,29 @@
+- name: Install Wazuh Agent on Ubuntu
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Add Wazuh GPG key
+      apt_key:
+        url: https://packages.wazuh.com/key/GPG-KEY-wazuh
+        state: present
+
+    - name: Add Wazuh repository
+      apt_repository:
+        repo: deb https://packages.wazuh.com/apt/ubuntu {{ 24.04 }} main
+        state: present
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Wazuh agent
+      apt:
+        name: wazuh
+        state: present
+
+    - name: Start and enable Wazuh service
+      service:
+        name: wazuh-agent
+        state: started
+        enabled: yes
