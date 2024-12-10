@@ -6,7 +6,7 @@
   
   tasks:
    - name: update apt list
-    apt:
+     ansible.builtin.apt:
       update_cache: yes
       
     - name: Update apt cache
