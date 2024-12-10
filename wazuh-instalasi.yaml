@@ -30,14 +30,12 @@
         name: wazuh-agent
         state: present
 
-    - name: Configure Wazuh agent to point to Wazuh server
-      ansible.builtin.blockinfile:
-        path: /var/ossec/etc/ossec.conf
-        marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
-        block: |
-          <server>
-              <address>192.168.0.109</address>
-          </server>
+- name: Configure Wazuh agent to point to Wazuh server
+  ansible.builtin.blockinfile:
+    path: /var/ossec/etc/ossec.conf
+    block: |
+          <address>192.168.0.109</address>
+    insertafter: "<server>"  # Menyisipkan blok setelah elemen <agent>
 
     - name: Enable and start Wazuh agent service
       ansible.builtin.systemd:
